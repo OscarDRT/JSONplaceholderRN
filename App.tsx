@@ -60,7 +60,7 @@ const App = () => {
   React.useEffect(() => {
     const fetch = async () => {
       try {
-        await placeholderApi.delete('/posts/1')
+        await placeholderApi.get('/posts/1')
       } catch (error) {
         console.log(error)
       }

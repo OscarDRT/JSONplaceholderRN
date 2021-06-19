@@ -6,7 +6,7 @@ export const placeholderApi = axios.create({
 })
 
 placeholderApi.defaults.headers.Accept = 'application/json'
-placeholderApi.defaults.headers['Content-type'] = 'application/json; charset=UTF-8'
+placeholderApi.defaults.headers['Content-type'] = 'application/json'
 
 if (__DEV__) {
   placeholderApi.interceptors.request.use(AxiosLogger.requestLogger, AxiosLogger.errorLogger)
