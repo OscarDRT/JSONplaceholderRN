@@ -6,12 +6,12 @@ import { Box } from '../../components/Box'
 import { Text } from '../../components/Text'
 import { useTheme } from '../../shared/theme/ThemeProvider'
 
-const FirstRoute = () => <Box flex={1} backgroundColor={'background'} />
+import TabAll from './TabAll'
 
 const SecondRoute = () => <Box style={{ flex: 1, backgroundColor: '#673ab7' }} />
 
 const renderScene = SceneMap({
-  first: FirstRoute,
+  first: TabAll,
   second: SecondRoute,
 })
 
