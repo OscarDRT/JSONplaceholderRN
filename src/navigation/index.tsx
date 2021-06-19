@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { View, Text, TouchableOpacity } from 'react-native'
 
-import PostsScreen from '../screens/Posst'
+import PostsScreen from '../screens/Posts'
 
 export const Navigation = () => {
   return (

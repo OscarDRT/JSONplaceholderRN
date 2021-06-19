@@ -13,13 +13,16 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { enableScreens } from 'react-native-screens'
 
 import { Navigation } from './src/navigation'
+import { ThemeProvider } from './src/shared/theme/ThemeProvider'
 enableScreens()
 
 const App = () => {
   return (
-    <SafeAreaProvider>
-      <Navigation />
-    </SafeAreaProvider>
+    <ThemeProvider>
+      <SafeAreaProvider>
+        <Navigation />
+      </SafeAreaProvider>
+    </ThemeProvider>
   )
 }
 
