@@ -3,6 +3,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { View, Text, TouchableOpacity } from 'react-native'
 
+import PostsScreen from '../screens/Posst'
+
 export const Navigation = () => {
   return (
     <NavigationContainer>
@@ -30,8 +32,13 @@ const Home = ({ navigation }) => {
 const RootNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name={'Home'} component={Home} />
-      <Stack.Screen name={'Home2'} component={Home2} />
+      <Stack.Screen
+        name={'PostsScreen'}
+        component={PostsScreen}
+        options={{
+          title: 'Posts',
+        }}
+      />
     </Stack.Navigator>
   )
 }
