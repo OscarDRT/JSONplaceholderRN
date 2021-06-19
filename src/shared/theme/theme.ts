@@ -8,6 +8,7 @@ export const palette = {
   primary: '#346299',
   secondary: '#EBD900',
   green: '#22C91A',
+  red: '#F80100',
 }
 
 export const theme = createTheme({
@@ -17,6 +18,7 @@ export const theme = createTheme({
     primary: palette.primary,
     secondary: palette.secondary,
     green: palette.green,
+    red: palette.red,
   },
   spacing: {
     xxs: 8,

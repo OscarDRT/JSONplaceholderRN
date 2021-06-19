@@ -70,6 +70,7 @@ export default function PostsScreen() {
       onIndexChange={setIndex}
       renderTabBar={_renderTabBar}
       initialLayout={{ width: layout.width }}
+      swipeEnabled={false}
     />
   )
 }
