@@ -18,6 +18,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen'
 
+import { placeholderApi } from './src/shared/api'
+
 const Section: React.FC<{
   title: string
 }> = ({ children, title }) => {
@@ -54,6 +56,18 @@ const App = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   }
+
+  React.useEffect(() => {
+    const fetch = async () => {
+      try {
+        await placeholderApi.delete('/posts/1')
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    fetch()
+  }, [])
 
   return (
     <SafeAreaView style={backgroundStyle}>
