@@ -12,8 +12,8 @@ class AsyncStorageService implements AsyncStorageServiceInterface {
     return AsyncStorage.setItem(key, value)
   }
 
-  retrieve(key: string): Promise<string | null> {
-    return AsyncStorage.getItem(key)
+  async retrieve(key: string): Promise<string | null> {
+    return await AsyncStorage.getItem(key)
   }
 
   delete(key: string): Promise<void> {
