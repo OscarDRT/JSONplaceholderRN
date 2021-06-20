@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import { useWindowDimensions, FlatList } from 'react-native'
+import { useWindowDimensions, FlatList, TouchableOpacity } from 'react-native'
 import { Placeholder, PlaceholderMedia, PlaceholderLine, Fade } from 'rn-placeholder'
 
 import { Box, MotiBox } from '../../components/Box'
 import Container from '../../components/Container'
+import { Text } from '../../components/Text'
+import { useRequest } from '../../hooks/useRequest'
+import { useTheme } from '../../shared/theme/ThemeProvider'
 import { PostInterface } from '../../shared/types'
 
 import Item from './components/Item'
-import { mock } from './mock'
 
 const ListEmptyComponent = () => {
   return (
@@ -31,7 +33,11 @@ const ListEmptyComponent = () => {
 }
 
 const TabAll = () => {
-  const [data, setData] = useState(mock)
+  const { response, error } = useRequest<PostInterface[]>({
+    url: `/posts`,
+  })
+
+  const { colors, spacing } = useTheme()
 
   const removeItemFromArr = (arr: PostInterface[], item: PostInterface) => {
     return arr.filter((e) => e.id !== item.id)
@@ -40,7 +46,7 @@ const TabAll = () => {
   return (
     <Container paddingVertical={'s'}>
       <FlatList<PostInterface>
-        data={data ?? []}
+        data={response ?? []}
         renderItem={({ item, index }: { item: PostInterface; index: number }) => (
           <Item
             post={item}
@@ -53,6 +59,12 @@ const TabAll = () => {
         keyExtractor={() => Math.random().toString()}
         ListEmptyComponent={ListEmptyComponent}
       />
+      <TouchableOpacity
+        activeOpacity={0.5}
+        style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: colors.red, padding: spacing.xxl }}
+      >
+        <Text>Delete All</Text>
+      </TouchableOpacity>
     </Container>
   )
 }
