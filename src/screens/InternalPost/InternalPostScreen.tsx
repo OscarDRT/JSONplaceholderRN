@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { Alert, ScrollView } from 'react-native'
+import { Alert, ScrollView, TouchableOpacity } from 'react-native'
 import { Fade, Placeholder, PlaceholderLine } from 'rn-placeholder'
 
 import { Box } from '../../components/Box'
 import Container from '../../components/Container'
+import { Header } from '../../components/Header'
+import { Icon } from '../../components/Icon'
 import { Text } from '../../components/Text'
 import { useRequest } from '../../hooks/useRequest'
 import { StackNavigationProps, RootStackParamList } from '../../navigation/type'
@@ -14,7 +16,7 @@ import { PostInterface } from '../../shared/types'
 import Comments from './components/Comments'
 import UserInfo from './components/UserInfo'
 
-const InternalPostScreen = ({ route }: StackNavigationProps<RootStackParamList, 'InternalPostScreen'>) => {
+const InternalPostScreen = ({ route, navigation }: StackNavigationProps<RootStackParamList, 'InternalPostScreen'>) => {
   const { spacing } = useTheme()
 
   const { id } = route.params ?? {}
@@ -44,8 +46,16 @@ const InternalPostScreen = ({ route }: StackNavigationProps<RootStackParamList, 
   }
 
   return (
-    <Container padding={'s'}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+    <Container>
+      <Header
+        title={'Post'}
+        leftComponent={
+          <TouchableOpacity onPress={() => navigation.canGoBack() && navigation.goBack()}>
+            <Icon name={'chevronLeft'} />
+          </TouchableOpacity>
+        }
+      />
+      <ScrollView showsVerticalScrollIndicator={false} style={{ padding: spacing.l }}>
         <Text fontSize={24} fontWeight={'bold'}>
           Description
         </Text>

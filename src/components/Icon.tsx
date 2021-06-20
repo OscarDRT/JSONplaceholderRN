@@ -12,8 +12,20 @@ function ChevronRight(props: SvgProps) {
   )
 }
 
+function ChevronLeft(props: SvgProps) {
+  return (
+    <Svg width={9} height={14} viewBox="0 0 9 14" fill="none" {...props}>
+      <Path
+        d="M8.043 11.927c.476.465.476 1.231 0 1.724-.503.465-1.285.465-1.76 0L.355 7.876a1.254 1.254 0 010-1.752L6.282.35c.476-.465 1.258-.465 1.761 0a1.254 1.254 0 010 1.752L3.013 7l5.031 4.927z"
+        fill="#ffffff"
+      />
+    </Svg>
+  )
+}
+
 const ICONS = {
   chevronRight: ChevronRight,
+  chevronLeft: ChevronLeft,
 }
 
 export type IconName = keyof typeof ICONS
