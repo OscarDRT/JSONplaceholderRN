@@ -23,6 +23,7 @@ const Comments = ({ postId }: { postId: number }) => {
 
   const { response, error } = useRequest<CommentInterface[]>({
     url: `posts/${postId}/comments`,
+    key: `POST_${postId}_comments`,
   })
 
   if (!response || error?.name) {

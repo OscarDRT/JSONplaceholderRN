@@ -19,6 +19,7 @@ const Row = ({ keyV, value }: { keyV: string; value: string }) => {
 const UserInfo = ({ userId }: { userId: number }) => {
   const { response, error } = useRequest<UserInterface>({
     url: `/users/${userId}`,
+    key: `USER_${userId}`,
   })
 
   if (!response?.id || error?.name) {

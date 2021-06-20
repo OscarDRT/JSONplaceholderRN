@@ -26,6 +26,12 @@ const useTransformPosts = () => {
     Promise.resolve()
   }
 
+  const removePost = async ({ post }: { post: PostInterface }) => {
+    const newPosts = posts.filter((e) => e.id !== post.id)
+    setPosts(newPosts)
+    await AsyncStorageService.save('POSTS', JSON.stringify(newPosts))
+  }
+
   React.useEffect(() => {
     AsyncStorageService.retrieve('POSTS')
       .then((r) => {
@@ -34,7 +40,7 @@ const useTransformPosts = () => {
       .catch(() => setPosts(response ?? []))
   }, [response])
 
-  return { transformPosts, posts, setPosts }
+  return { transformPosts, posts, setPosts, removePost }
 }
 
 export default useTransformPosts

@@ -35,17 +35,13 @@ const ListEmptyComponent = () => {
 }
 
 const TabAll = () => {
-  const { transformPosts, posts } = useTransformPosts()
+  const { transformPosts, posts, setPosts, removePost } = useTransformPosts()
 
   React.useEffect(() => {
     transformPosts()
   }, [transformPosts])
 
   const { colors, spacing } = useTheme()
-
-  const removeItemFromArr = (arr: PostInterface[], item: PostInterface) => {
-    return arr.filter((e) => e.id !== item.id)
-  }
 
   return (
     <Container paddingVertical={'s'}>
@@ -56,7 +52,7 @@ const TabAll = () => {
             post={item}
             index={index}
             onSwipe={() => {
-              setData(removeItemFromArr(data, item))
+              removePost({ post: item })
             }}
           />
         )}

@@ -21,6 +21,7 @@ const InternalPostScreen = ({ route }: StackNavigationProps<RootStackParamList, 
 
   const { response: post, error } = useRequest<PostInterface>({
     url: `/posts/${id}`,
+    key: `POST_${id}`,
   })
 
   if (!post) {
