@@ -5,6 +5,7 @@ import { Swipeable } from 'react-native-gesture-handler'
 
 import { Box, MotiBox } from '../../../components/Box'
 import { AnimatedText, Text } from '../../../components/Text'
+import { Icon, IconName } from '../../../components/Icon'
 
 const MotiTouch = motify(TouchableOpacity)()
 
@@ -59,7 +60,7 @@ const Item = ({ post, index, onSwipe }: ItemProps) => {
           <Text>{post.title}</Text>
           <Text>{post.body}</Text>
         </Box>
-        <Box height={10} width={10} backgroundColor={'primary'} />
+        <Icon name={'chevronRight'} />
       </Box>
     </Swipeable>
   )
