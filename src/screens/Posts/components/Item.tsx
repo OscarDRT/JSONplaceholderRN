@@ -1,13 +1,13 @@
 import React from 'react'
-import { motify } from 'moti'
-import { Animated, TouchableOpacity, useWindowDimensions } from 'react-native'
-import { Swipeable } from 'react-native-gesture-handler'
+import { Animated } from 'react-native'
+import { Swipeable, TouchableOpacity } from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 
-import { Box, MotiBox } from '../../../components/Box'
+import { Box } from '../../../components/Box'
 import { AnimatedText, Text } from '../../../components/Text'
-import { Icon, IconName } from '../../../components/Icon'
-
-const MotiTouch = motify(TouchableOpacity)()
+import { Icon } from '../../../components/Icon'
+import { RootStackParamList } from '../../../navigation/type'
 
 interface ItemProps {
   post: {
@@ -43,25 +43,27 @@ const RightActions = (progress: Animated.AnimatedInterpolation, dragX: Animated.
 }
 
 const Item = ({ post, index, onSwipe }: ItemProps) => {
-  const { width } = useWindowDimensions()
+  const { navigate } = useNavigation<StackNavigationProp<RootStackParamList, 'PostsScreen'>>()
 
   return (
     <Swipeable renderRightActions={RightActions} onSwipeableRightOpen={onSwipe}>
-      <Box
-        backgroundColor={'foregroud'}
-        borderRadius={8}
-        marginBottom={'xxs'}
-        flexDirection={'row'}
-        alignItems={'center'}
-        padding={'s'}
-      >
-        <Box height={10} width={10} backgroundColor={'primary'} borderRadius={10} />
-        <Box flex={1} marginHorizontal={'s'}>
-          <Text>{post.title}</Text>
-          <Text>{post.body}</Text>
+      <TouchableOpacity activeOpacity={0.5} onPress={() => navigate('InternalPostScreen', { id: post.id })}>
+        <Box
+          backgroundColor={'foregroud'}
+          borderRadius={8}
+          marginBottom={'xxs'}
+          flexDirection={'row'}
+          alignItems={'center'}
+          padding={'s'}
+        >
+          <Box height={10} width={10} backgroundColor={'primary'} borderRadius={10} />
+          <Box flex={1} marginHorizontal={'s'}>
+            <Text textDecorationLine={'underline'}>{post.title}:</Text>
+            <Text>{post.body}</Text>
+          </Box>
+          <Icon name={'chevronRight'} />
         </Box>
-        <Icon name={'chevronRight'} />
-      </Box>
+      </TouchableOpacity>
     </Swipeable>
   )
 }

@@ -4,16 +4,10 @@ import { Placeholder, PlaceholderMedia, PlaceholderLine, Fade } from 'rn-placeho
 
 import { Box, MotiBox } from '../../components/Box'
 import Container from '../../components/Container'
+import { PostInterface } from '../../shared/types'
 
 import Item from './components/Item'
 import { mock } from './mock'
-
-export interface PostI {
-  userId: number
-  id: number
-  title: string
-  body: string
-}
 
 const ListEmptyComponent = () => {
   return (
@@ -39,15 +33,15 @@ const ListEmptyComponent = () => {
 const TabAll = () => {
   const [data, setData] = useState(mock)
 
-  const removeItemFromArr = (arr: PostI[], item: PostI) => {
+  const removeItemFromArr = (arr: PostInterface[], item: PostInterface) => {
     return arr.filter((e) => e.id !== item.id)
   }
 
   return (
     <Container paddingVertical={'s'}>
-      <FlatList<PostI>
+      <FlatList<PostInterface>
         data={data ?? []}
-        renderItem={({ item, index }: { item: PostI; index: number }) => (
+        renderItem={({ item, index }: { item: PostInterface; index: number }) => (
           <Item
             post={item}
             index={index}
