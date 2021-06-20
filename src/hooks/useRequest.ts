@@ -2,8 +2,12 @@ import { useFocusEffect } from '@react-navigation/native'
 import React from 'react'
 
 import { placeholderApi } from '../shared/api'
+import AsyncStorageService from '../shared/AsyncStorageService'
 
-export function useRequest<T>({ url }: { url: string }): { response: T | null; error: Error | null } {
+export function useRequest<T>({ url, key }: { url: string; key?: string }): {
+  response: T | null
+  error: Error | null
+} {
   const [response, setResponse] = React.useState<T | null>(null)
 
   const [error, setError] = React.useState<Error | null>(null)
@@ -13,13 +17,26 @@ export function useRequest<T>({ url }: { url: string }): { response: T | null; e
       const fetchData = async (): Promise<void> => {
         try {
           const { data } = await placeholderApi(url)
+          if (key) {
+            await AsyncStorageService.save(key, JSON.stringify(data))
+          }
           setResponse(data)
         } catch (e) {
           setError(e)
         }
       }
-      fetchData()
-    }, [url])
+
+      const saveData = async () => {
+        const value = await AsyncStorageService.retrieve(key ?? '')
+        if (value) {
+          setResponse(JSON.parse(value))
+        } else {
+          fetchData()
+        }
+      }
+
+      saveData()
+    }, [url, key])
   )
   return { response, error }
 }
