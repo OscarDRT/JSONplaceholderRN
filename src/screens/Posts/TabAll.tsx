@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { useWindowDimensions, FlatList, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { FlatList, TouchableOpacity } from 'react-native'
 import { Placeholder, PlaceholderMedia, PlaceholderLine, Fade } from 'rn-placeholder'
 
-import { Box, MotiBox } from '../../components/Box'
+import { Box } from '../../components/Box'
 import Container from '../../components/Container'
 import { Text } from '../../components/Text'
 import { useRequest } from '../../hooks/useRequest'
