@@ -8,6 +8,7 @@ import { Text } from '../../components/Text'
 import { useRequest } from '../../hooks/useRequest'
 import { useTheme } from '../../shared/theme/ThemeProvider'
 import { PostInterface } from '../../shared/types'
+import AsyncStorageService from '../../shared/AsyncStorageService'
 
 import Item from './components/Item'
 
@@ -42,6 +43,13 @@ const TabAll = () => {
   const removeItemFromArr = (arr: PostInterface[], item: PostInterface) => {
     return arr.filter((e) => e.id !== item.id)
   }
+
+  React.useEffect(() => {
+    const savePosts = async () => {
+      return await AsyncStorageService.retrieve('oscar')
+    }
+    savePosts().then((r) => console.log(r))
+  }, [])
 
   return (
     <Container paddingVertical={'s'}>
