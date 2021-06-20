@@ -9,7 +9,7 @@ import useTransformPosts from '../../hooks/useTransformPosts'
 
 import Item from './components/Item'
 
-const TabAll = () => {
+const TabFavorites = () => {
   const { transformPosts, posts, removePost } = useTransformPosts()
 
   React.useEffect(() => {
@@ -21,7 +21,7 @@ const TabAll = () => {
   return (
     <Container paddingVertical={'s'}>
       <FlatList<PostInterface>
-        data={posts ?? []}
+        data={posts.filter((post) => post.isFavorite === true) ?? []}
         renderItem={({ item, index }: { item: PostInterface; index: number }) => (
           <Item
             post={item}
@@ -32,7 +32,7 @@ const TabAll = () => {
           />
         )}
         keyExtractor={() => Math.random().toString()}
-        ListEmptyComponent={<Text textAlign={'center'}>The section all is empty</Text>}
+        ListEmptyComponent={<Text textAlign={'center'}>The section favorites is empty</Text>}
         removeClippedSubviews={true}
         initialNumToRender={10}
         maxToRenderPerBatch={10}
@@ -49,4 +49,4 @@ const TabAll = () => {
   )
 }
 
-export default TabAll
+export default TabFavorites

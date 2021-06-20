@@ -7,22 +7,17 @@ import { Header } from '../../components/Header'
 import Container from '../../components/Container'
 import { Text } from '../../components/Text'
 import { useTheme } from '../../shared/theme/ThemeProvider'
-import { Icon } from '../../components/Icon'
-import useTransformPosts from '../../hooks/useTransformPosts'
 
 import TabAll from './TabAll'
-
-const SecondRoute = () => <Box style={{ flex: 1, backgroundColor: '#673ab7' }} />
+import TabFavorites from './TabFavorites'
 
 const renderScene = SceneMap({
   first: TabAll,
-  second: SecondRoute,
+  second: TabFavorites,
 })
 
 export default function PostsScreen() {
   const layout = useWindowDimensions()
-
-  const { refresh } = useTransformPosts()
 
   const { colors, spacing } = useTheme()
 
@@ -74,7 +69,7 @@ export default function PostsScreen() {
       <Header
         title={'Posts'}
         rightComponent={
-          <TouchableOpacity onPress={refresh}>
+          <TouchableOpacity>
             <Text fontSize={20} color={'background'}>
               Refresh
             </Text>
