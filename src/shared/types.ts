@@ -3,6 +3,8 @@ export interface PostInterface {
   id: number
   title: string
   body: string
+  isNew?: boolean
+  isFavorite?: boolean
 }
 
 export interface Geo {

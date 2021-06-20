@@ -8,14 +8,10 @@ import { Box } from '../../../components/Box'
 import { AnimatedText, Text } from '../../../components/Text'
 import { Icon } from '../../../components/Icon'
 import { RootStackParamList } from '../../../navigation/type'
+import { PostInterface } from '../../../shared/types'
 
 interface ItemProps {
-  post: {
-    userId: number
-    id: number
-    title: string
-    body: string
-  }
+  post: PostInterface
   index: number
   onSwipe: () => void
 }
@@ -56,7 +52,7 @@ const Item = ({ post, index, onSwipe }: ItemProps) => {
           alignItems={'center'}
           padding={'s'}
         >
-          <Box height={10} width={10} backgroundColor={'primary'} borderRadius={10} />
+          <Box height={10} width={10} backgroundColor={post.isNew ? 'primary' : 'transparent'} borderRadius={10} />
           <Box flex={1} marginHorizontal={'s'}>
             <Text textDecorationLine={'underline'}>{post.title}:</Text>
             <Text>{post.body}</Text>

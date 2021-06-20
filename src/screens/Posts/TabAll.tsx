@@ -9,6 +9,7 @@ import { useRequest } from '../../hooks/useRequest'
 import { useTheme } from '../../shared/theme/ThemeProvider'
 import { PostInterface } from '../../shared/types'
 import AsyncStorageService from '../../shared/AsyncStorageService'
+import useTransformPosts from '../../hooks/useTransformPosts'
 
 import Item from './components/Item'
 
@@ -34,10 +35,11 @@ const ListEmptyComponent = () => {
 }
 
 const TabAll = () => {
-  const { response, error } = useRequest<PostInterface[]>({
-    url: `/posts`,
-    key: 'POSTS',
-  })
+  const { transformPosts, posts } = useTransformPosts()
+
+  React.useEffect(() => {
+    transformPosts()
+  }, [transformPosts])
 
   const { colors, spacing } = useTheme()
 
@@ -48,7 +50,7 @@ const TabAll = () => {
   return (
     <Container paddingVertical={'s'}>
       <FlatList<PostInterface>
-        data={response ?? []}
+        data={posts ?? []}
         renderItem={({ item, index }: { item: PostInterface; index: number }) => (
           <Item
             post={item}

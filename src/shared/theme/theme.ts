@@ -9,6 +9,7 @@ export const palette = {
   secondary: '#EBD900',
   green: '#22C91A',
   red: '#F80100',
+  transparent: 'transparent',
 }
 
 export const theme = createTheme({
@@ -19,6 +20,7 @@ export const theme = createTheme({
     secondary: palette.secondary,
     green: palette.green,
     red: palette.red,
+    transparent: palette.transparent,
   },
   spacing: {
     xxs: 8,
