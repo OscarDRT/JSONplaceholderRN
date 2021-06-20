@@ -3,8 +3,12 @@ import { TouchableOpacity, useWindowDimensions } from 'react-native'
 import { TabView, SceneMap, SceneRendererProps, NavigationState } from 'react-native-tab-view'
 
 import { Box } from '../../components/Box'
+import { Header } from '../../components/Header'
+import Container from '../../components/Container'
 import { Text } from '../../components/Text'
 import { useTheme } from '../../shared/theme/ThemeProvider'
+import { Icon } from '../../components/Icon'
+import useTransformPosts from '../../hooks/useTransformPosts'
 
 import TabAll from './TabAll'
 
@@ -17,6 +21,8 @@ const renderScene = SceneMap({
 
 export default function PostsScreen() {
   const layout = useWindowDimensions()
+
+  const { refresh } = useTransformPosts()
 
   const { colors, spacing } = useTheme()
 
@@ -64,13 +70,25 @@ export default function PostsScreen() {
   }
 
   return (
-    <TabView
-      navigationState={{ index, routes }}
-      renderScene={renderScene}
-      onIndexChange={setIndex}
-      renderTabBar={_renderTabBar}
-      initialLayout={{ width: layout.width }}
-      swipeEnabled={false}
-    />
+    <Container>
+      <Header
+        title={'Posts'}
+        rightComponent={
+          <TouchableOpacity onPress={refresh}>
+            <Text fontSize={20} color={'background'}>
+              Refresh
+            </Text>
+          </TouchableOpacity>
+        }
+      />
+      <TabView
+        navigationState={{ index, routes }}
+        renderScene={renderScene}
+        onIndexChange={setIndex}
+        renderTabBar={_renderTabBar}
+        initialLayout={{ width: layout.width }}
+        swipeEnabled={false}
+      />
+    </Container>
   )
 }
