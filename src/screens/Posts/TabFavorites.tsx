@@ -39,12 +39,6 @@ const TabFavorites = () => {
         updateCellsBatchingPeriod={100}
         windowSize={7}
       />
-      <TouchableOpacity
-        activeOpacity={0.5}
-        style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: colors.red, padding: spacing.xxl }}
-      >
-        <Text>Delete All</Text>
-      </TouchableOpacity>
     </Container>
   )
 }
