@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import { Alert, ScrollView, TouchableOpacity } from 'react-native'
+import { ScrollView, TouchableOpacity } from 'react-native'
 import { Fade, Placeholder, PlaceholderLine } from 'rn-placeholder'
 
-import { Box } from '../../components/Box'
 import Container from '../../components/Container'
 import { Header } from '../../components/Header'
 import { Icon } from '../../components/Icon'
 import { Text } from '../../components/Text'
 import { useRequest } from '../../hooks/useRequest'
+import useTransformPosts from '../../hooks/useTransformPosts'
 import { StackNavigationProps, RootStackParamList } from '../../navigation/type'
-import { placeholderApi } from '../../shared/api'
+import AsyncStorageService from '../../shared/AsyncStorageService'
 import { useTheme } from '../../shared/theme/ThemeProvider'
 import { PostInterface } from '../../shared/types'
 
@@ -19,12 +19,21 @@ import UserInfo from './components/UserInfo'
 const InternalPostScreen = ({ route, navigation }: StackNavigationProps<RootStackParamList, 'InternalPostScreen'>) => {
   const { spacing } = useTheme()
 
-  const { id } = route.params ?? {}
+  const { id, isFavorite } = route.params ?? {}
+
+  const [star, setStar] = useState(isFavorite)
+
+  const { addFavorite } = useTransformPosts()
 
   const { response: post, error } = useRequest<PostInterface>({
     url: `/posts/${id}`,
     key: `POST_${id}`,
   })
+
+  const onPress = async () => {
+    setStar((s) => !s)
+    await addFavorite({ id })
+  }
 
   if (!post) {
     return (
@@ -52,6 +61,11 @@ const InternalPostScreen = ({ route, navigation }: StackNavigationProps<RootStac
         leftComponent={
           <TouchableOpacity onPress={() => navigation.canGoBack() && navigation.goBack()}>
             <Icon name={'chevronLeft'} />
+          </TouchableOpacity>
+        }
+        rightComponent={
+          <TouchableOpacity onPress={onPress} activeOpacity={0.7}>
+            <Icon name={'star'} fill={star ? '#ffc850' : '#ffffff'} size={30} />
           </TouchableOpacity>
         }
       />

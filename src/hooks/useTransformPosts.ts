@@ -1,3 +1,4 @@
+import { useFocusEffect } from '@react-navigation/native'
 import React from 'react'
 
 import AsyncStorageService from '../shared/AsyncStorageService'
@@ -32,15 +33,25 @@ const useTransformPosts = () => {
     await AsyncStorageService.save('POSTS', JSON.stringify(newPosts))
   }
 
-  React.useEffect(() => {
-    AsyncStorageService.retrieve('POSTS')
-      .then((r) => {
-        setPosts(JSON.parse(r ?? '[]'))
-      })
-      .catch(() => setPosts(response ?? []))
-  }, [response])
+  const addFavorite = async ({ id }: { id: number }) => {
+    const $posts = posts.map((p: PostInterface) => {
+      return p.id === id ? { ...p, isFavorite: !p.isFavorite } : { ...p }
+    })
 
-  return { transformPosts, posts, setPosts, removePost }
+    await AsyncStorageService.save('POSTS', JSON.stringify($posts))
+  }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      AsyncStorageService.retrieve('POSTS')
+        .then((r) => {
+          setPosts(JSON.parse(r ?? '[]'))
+        })
+        .catch(() => setPosts(response ?? []))
+    }, [response])
+  )
+
+  return { transformPosts, posts, setPosts, removePost, addFavorite }
 }
 
 export default useTransformPosts

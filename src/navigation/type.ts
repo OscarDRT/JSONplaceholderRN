@@ -8,5 +8,5 @@ export interface StackNavigationProps<ParamList extends ParamListBase, RouteName
 
 export type RootStackParamList = {
   PostsScreen: undefined
-  InternalPostScreen: { id: number }
+  InternalPostScreen: { userId: number; id: number; title: string; body: string; isNew?: boolean; isFavorite?: boolean }
 }

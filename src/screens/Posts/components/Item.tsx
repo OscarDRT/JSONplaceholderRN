@@ -43,7 +43,7 @@ const Item = ({ post, index, onSwipe }: ItemProps) => {
 
   return (
     <Swipeable renderRightActions={RightActions} onSwipeableRightOpen={onSwipe}>
-      <TouchableOpacity activeOpacity={0.5} onPress={() => navigate('InternalPostScreen', { id: post.id })}>
+      <TouchableOpacity activeOpacity={0.5} onPress={() => navigate('InternalPostScreen', { ...post })}>
         <Box
           backgroundColor={'foregroud'}
           borderRadius={8}
