@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Alert } from 'react-native'
+import { Alert, ScrollView } from 'react-native'
 import { Fade, Placeholder, PlaceholderLine } from 'rn-placeholder'
 
 import { Box } from '../../components/Box'
@@ -11,6 +11,7 @@ import { placeholderApi } from '../../shared/api'
 import { useTheme } from '../../shared/theme/ThemeProvider'
 import { PostInterface } from '../../shared/types'
 
+import Comments from './components/Comments'
 import UserInfo from './components/UserInfo'
 
 const InternalPostScreen = ({ route }: StackNavigationProps<RootStackParamList, 'InternalPostScreen'>) => {
@@ -43,7 +44,7 @@ const InternalPostScreen = ({ route }: StackNavigationProps<RootStackParamList, 
 
   return (
     <Container padding={'s'}>
-      <Box>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <Text fontSize={24} fontWeight={'bold'}>
           Description
         </Text>
@@ -53,7 +54,9 @@ const InternalPostScreen = ({ route }: StackNavigationProps<RootStackParamList, 
         </Text>
 
         <UserInfo userId={post?.userId} />
-      </Box>
+
+        <Comments postId={post?.id} />
+      </ScrollView>
     </Container>
   )
 }
