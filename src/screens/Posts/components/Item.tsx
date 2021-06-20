@@ -9,6 +9,7 @@ import { AnimatedText, Text } from '../../../components/Text'
 import { Icon } from '../../../components/Icon'
 import { RootStackParamList } from '../../../navigation/type'
 import { PostInterface } from '../../../shared/types'
+import useTransformPosts from '../../../hooks/useTransformPosts'
 
 interface ItemProps {
   post: PostInterface
@@ -41,9 +42,19 @@ const RightActions = (progress: Animated.AnimatedInterpolation, dragX: Animated.
 const Item = ({ post, index, onSwipe }: ItemProps) => {
   const { navigate } = useNavigation<StackNavigationProp<RootStackParamList, 'PostsScreen'>>()
 
+  const { postViewed } = useTransformPosts()
+
   return (
     <Swipeable renderRightActions={RightActions} onSwipeableRightOpen={onSwipe}>
-      <TouchableOpacity activeOpacity={0.5} onPress={() => navigate('InternalPostScreen', { ...post })}>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={async () => {
+          navigate('InternalPostScreen', { ...post })
+          if (post.isNew) {
+            await postViewed({ id: post.id })
+          }
+        }}
+      >
         <Box
           backgroundColor={'foregroud'}
           borderRadius={8}
@@ -52,7 +63,11 @@ const Item = ({ post, index, onSwipe }: ItemProps) => {
           alignItems={'center'}
           padding={'s'}
         >
-          <Box height={10} width={10} backgroundColor={post.isNew ? 'primary' : 'transparent'} borderRadius={10} />
+          {post.isFavorite ? (
+            <Icon name={'star'} size={15} />
+          ) : (
+            <Box height={10} width={10} backgroundColor={post.isNew ? 'primary' : 'transparent'} borderRadius={10} />
+          )}
           <Box flex={1} marginHorizontal={'s'}>
             <Text textDecorationLine={'underline'}>{post.title}:</Text>
             <Text>{post.body}</Text>

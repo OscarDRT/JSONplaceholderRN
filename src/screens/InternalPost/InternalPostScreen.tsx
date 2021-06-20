@@ -9,7 +9,6 @@ import { Text } from '../../components/Text'
 import { useRequest } from '../../hooks/useRequest'
 import useTransformPosts from '../../hooks/useTransformPosts'
 import { StackNavigationProps, RootStackParamList } from '../../navigation/type'
-import AsyncStorageService from '../../shared/AsyncStorageService'
 import { useTheme } from '../../shared/theme/ThemeProvider'
 import { PostInterface } from '../../shared/types'
 

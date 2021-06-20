@@ -41,6 +41,14 @@ const useTransformPosts = () => {
     await AsyncStorageService.save('POSTS', JSON.stringify($posts))
   }
 
+  const postViewed = async ({ id }: { id: number }) => {
+    const $posts = posts.map((p: PostInterface) => {
+      return p.id === id ? { ...p, isNew: !p.isNew } : { ...p }
+    })
+
+    await AsyncStorageService.save('POSTS', JSON.stringify($posts))
+  }
+
   useFocusEffect(
     React.useCallback(() => {
       AsyncStorageService.retrieve('POSTS')
@@ -51,7 +59,7 @@ const useTransformPosts = () => {
     }, [response])
   )
 
-  return { transformPosts, posts, setPosts, removePost, addFavorite }
+  return { transformPosts, posts, setPosts, removePost, addFavorite, postViewed }
 }
 
 export default useTransformPosts
