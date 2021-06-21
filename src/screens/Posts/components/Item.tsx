@@ -9,7 +9,6 @@ import { AnimatedText, Text } from '../../../components/Text'
 import { Icon } from '../../../components/Icon'
 import { RootStackParamList } from '../../../navigation/type'
 import { PostInterface } from '../../../shared/types'
-import useTransformPosts from '../../../hooks/useTransformPosts'
 import { usePosts } from '../../../shared/Context/CreateContext'
 
 interface ItemProps {

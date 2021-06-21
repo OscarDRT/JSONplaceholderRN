@@ -5,7 +5,6 @@ import Container from '../../components/Container'
 import { Text } from '../../components/Text'
 import { useTheme } from '../../shared/theme/ThemeProvider'
 import { PostInterface } from '../../shared/types'
-import useTransformPosts from '../../hooks/useTransformPosts'
 import { usePosts } from '../../shared/Context/CreateContext'
 
 import Item from './components/Item'
