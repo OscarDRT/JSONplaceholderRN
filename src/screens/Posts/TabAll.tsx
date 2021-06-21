@@ -28,7 +28,7 @@ const TabAll = () => {
           />
         )}
         keyExtractor={() => Math.random().toString()}
-        ListEmptyComponent={<Text textAlign={'center'}>The section all is empty</Text>}
+        ListEmptyComponent={<Text textAlign={'center'}>Empty</Text>}
         removeClippedSubviews={true}
         initialNumToRender={10}
         maxToRenderPerBatch={10}
