@@ -39,9 +39,18 @@ const TabAll = () => {
         <TouchableOpacity
           onPress={deleteAll}
           activeOpacity={0.5}
-          style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: colors.red, padding: spacing.xxl }}
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: colors.red,
+            padding: spacing.xxl,
+            marginHorizontal: spacing.xxl,
+            borderRadius: 8,
+          }}
         >
-          <Text color={'label'}>Delete All</Text>
+          <Text color={'label'} fontWeight={'bold'}>
+            Delete All
+          </Text>
         </TouchableOpacity>
       )}
     </Container>
