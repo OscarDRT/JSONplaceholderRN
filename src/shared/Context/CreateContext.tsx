@@ -33,6 +33,7 @@ const Provider = ({ children }: { children: ReactNode }) => {
   const removePost = async ({ post }: { post: PostInterface }) => {
     const $posts = posts.filter((e) => e.id !== post.id)
     setPosts($posts)
+    await placeholderApi.delete(`posts/${post.id}`)
   }
 
   const addFavorite = async ({ id }: { id: number }) => {
@@ -49,8 +50,10 @@ const Provider = ({ children }: { children: ReactNode }) => {
     setPosts($posts)
   }
 
-  const deleteAll = () => {
+  const deleteAll = async () => {
     setPosts(INITIAL_DATA)
+    //Promise.allSettled does not exist
+    await Promise.all(posts.map((post) => placeholderApi.delete(`posts/${post.id}`)))
   }
 
   return (
