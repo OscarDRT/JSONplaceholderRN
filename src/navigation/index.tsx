@@ -4,10 +4,19 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import PostsScreen from '../screens/Posts'
 import InternalPostScreen from '../screens/InternalPost'
+import { usePosts } from '../shared/Context/CreateContext'
 
 import { RootStackParamList } from './type'
 
 export const Navigation = () => {
+  const { loading, loadPosts } = usePosts()
+
+  React.useEffect(() => {
+    if (loading) {
+      loadPosts()
+    }
+  }, [loading, loadPosts])
+
   return (
     <NavigationContainer>
       <RootNavigator />

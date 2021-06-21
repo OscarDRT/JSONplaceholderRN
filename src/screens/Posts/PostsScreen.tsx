@@ -7,6 +7,7 @@ import { Header } from '../../components/Header'
 import Container from '../../components/Container'
 import { Text } from '../../components/Text'
 import { useTheme } from '../../shared/theme/ThemeProvider'
+import { usePosts } from '../../shared/Context/CreateContext'
 
 import TabAll from './TabAll'
 import TabFavorites from './TabFavorites'
@@ -20,6 +21,8 @@ export default function PostsScreen() {
   const layout = useWindowDimensions()
 
   const { colors, spacing } = useTheme()
+
+  const { loadPosts } = usePosts()
 
   const [index, setIndex] = React.useState(0)
   const [routes] = React.useState([
@@ -69,7 +72,7 @@ export default function PostsScreen() {
       <Header
         title={'Posts'}
         rightComponent={
-          <TouchableOpacity>
+          <TouchableOpacity onPress={loadPosts}>
             <Text fontSize={20} color={'background'}>
               Refresh
             </Text>

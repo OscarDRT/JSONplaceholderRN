@@ -6,15 +6,12 @@ import { Text } from '../../components/Text'
 import { useTheme } from '../../shared/theme/ThemeProvider'
 import { PostInterface } from '../../shared/types'
 import useTransformPosts from '../../hooks/useTransformPosts'
+import { usePosts } from '../../shared/Context/CreateContext'
 
 import Item from './components/Item'
 
 const TabAll = () => {
-  const { transformPosts, posts, removePost } = useTransformPosts()
-
-  React.useEffect(() => {
-    transformPosts()
-  }, [transformPosts])
+  const { posts, removePost, deleteAll } = usePosts()
 
   const { colors, spacing } = useTheme()
 
@@ -39,12 +36,15 @@ const TabAll = () => {
         updateCellsBatchingPeriod={100}
         windowSize={7}
       />
-      <TouchableOpacity
-        activeOpacity={0.5}
-        style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: colors.red, padding: spacing.xxl }}
-      >
-        <Text>Delete All</Text>
-      </TouchableOpacity>
+      {!!posts.length && (
+        <TouchableOpacity
+          onPress={deleteAll}
+          activeOpacity={0.5}
+          style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: colors.red, padding: spacing.xxl }}
+        >
+          <Text>Delete All</Text>
+        </TouchableOpacity>
+      )}
     </Container>
   )
 }

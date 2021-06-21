@@ -15,15 +15,18 @@ import { enableScreens } from 'react-native-screens'
 
 import { Navigation } from './src/navigation'
 import { ThemeProvider } from './src/shared/theme/ThemeProvider'
+import { Provider } from './src/shared/Context/CreateContext'
 enableScreens()
 
 const App = () => {
   return (
-    <ThemeProvider>
-      <SafeAreaProvider>
-        <Navigation />
-      </SafeAreaProvider>
-    </ThemeProvider>
+    <Provider>
+      <ThemeProvider>
+        <SafeAreaProvider>
+          <Navigation />
+        </SafeAreaProvider>
+      </ThemeProvider>
+    </Provider>
   )
 }
 

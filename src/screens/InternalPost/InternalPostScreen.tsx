@@ -9,6 +9,7 @@ import { Text } from '../../components/Text'
 import { useRequest } from '../../hooks/useRequest'
 import useTransformPosts from '../../hooks/useTransformPosts'
 import { StackNavigationProps, RootStackParamList } from '../../navigation/type'
+import { usePosts } from '../../shared/Context/CreateContext'
 import { useTheme } from '../../shared/theme/ThemeProvider'
 import { PostInterface } from '../../shared/types'
 
@@ -22,16 +23,15 @@ const InternalPostScreen = ({ route, navigation }: StackNavigationProps<RootStac
 
   const [star, setStar] = useState(isFavorite)
 
-  const { addFavorite } = useTransformPosts()
+  const { addFavorite } = usePosts()
 
   const { response: post, error } = useRequest<PostInterface>({
     url: `/posts/${id}`,
-    key: `POST_${id}`,
   })
 
   const onPress = async () => {
     setStar((s) => !s)
-    await addFavorite({ id })
+    addFavorite({ id })
   }
 
   if (!post) {

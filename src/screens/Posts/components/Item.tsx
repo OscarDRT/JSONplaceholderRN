@@ -10,6 +10,7 @@ import { Icon } from '../../../components/Icon'
 import { RootStackParamList } from '../../../navigation/type'
 import { PostInterface } from '../../../shared/types'
 import useTransformPosts from '../../../hooks/useTransformPosts'
+import { usePosts } from '../../../shared/Context/CreateContext'
 
 interface ItemProps {
   post: PostInterface
@@ -42,7 +43,7 @@ const RightActions = (progress: Animated.AnimatedInterpolation, dragX: Animated.
 const Item = ({ post, index, onSwipe }: ItemProps) => {
   const { navigate } = useNavigation<StackNavigationProp<RootStackParamList, 'PostsScreen'>>()
 
-  const { postViewed } = useTransformPosts()
+  const { postViewed } = usePosts()
 
   return (
     <Swipeable renderRightActions={RightActions} onSwipeableRightOpen={onSwipe}>
