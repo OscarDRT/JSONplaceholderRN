@@ -10,8 +10,10 @@ import { UserInterface } from '../../../shared/types'
 const Row = ({ keyV, value }: { keyV: string; value: string }) => {
   return (
     <Box flexDirection={'row'} alignItems={'center'} marginBottom={'m'}>
-      <Text fontSize={16}>{keyV}: </Text>
-      <Text>{value}</Text>
+      <Text fontSize={16} color={'label'}>
+        {keyV}:{' '}
+      </Text>
+      <Text color={'label'}>{value}</Text>
     </Box>
   )
 }
@@ -28,7 +30,7 @@ const UserInfo = ({ userId }: { userId: number }) => {
 
   return (
     <Box marginVertical={'xxl'}>
-      <Text fontSize={24} fontWeight={'bold'}>
+      <Text fontSize={24} fontWeight={'bold'} color={'label'}>
         User
       </Text>
       <Row keyV={'Name'} value={response?.name ?? ''} />

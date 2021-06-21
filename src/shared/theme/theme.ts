@@ -10,6 +10,9 @@ export const palette = {
   green: '#22C91A',
   red: '#F80100',
   transparent: 'transparent',
+  /*  */
+  labelLigth: '#000',
+  labelDark: '#ffffff',
 }
 
 export const theme = createTheme({
@@ -21,6 +24,8 @@ export const theme = createTheme({
     green: palette.green,
     red: palette.red,
     transparent: palette.transparent,
+    /*  */
+    label: palette.labelLigth,
   },
   spacing: {
     xxs: 8,
@@ -40,6 +45,8 @@ export const darkTheme = createTheme({
     ...theme.colors,
     background: palette.backgroundDark,
     foregroud: palette.foregroudDark,
+    /*  */
+    label: palette.labelDark,
   },
 })
 

@@ -10,6 +10,7 @@ import { Icon } from '../../../components/Icon'
 import { RootStackParamList } from '../../../navigation/type'
 import { PostInterface } from '../../../shared/types'
 import { usePosts } from '../../../shared/Context/CreateContext'
+import { useTheme } from '../../../shared/theme/ThemeProvider'
 
 interface ItemProps {
   post: PostInterface
@@ -44,6 +45,8 @@ const Item = ({ post, index, onSwipe }: ItemProps) => {
 
   const { postViewed } = usePosts()
 
+  const { colors } = useTheme()
+
   return (
     <Swipeable renderRightActions={RightActions} onSwipeableRightOpen={onSwipe}>
       <TouchableOpacity
@@ -69,10 +72,12 @@ const Item = ({ post, index, onSwipe }: ItemProps) => {
             <Box height={10} width={10} backgroundColor={post.isNew ? 'primary' : 'transparent'} borderRadius={10} />
           )}
           <Box flex={1} marginHorizontal={'s'}>
-            <Text textDecorationLine={'underline'}>{post.title}:</Text>
-            <Text>{post.body}</Text>
+            <Text color={'label'} textDecorationLine={'underline'}>
+              {post.title}:
+            </Text>
+            <Text color={'label'}>{post.body}</Text>
           </Box>
-          <Icon name={'chevronRight'} />
+          <Icon name={'chevronRight'} fill={colors.label} />
         </Box>
       </TouchableOpacity>
     </Swipeable>

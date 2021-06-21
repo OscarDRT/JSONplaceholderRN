@@ -26,7 +26,11 @@ const TabFavorites = () => {
           />
         )}
         keyExtractor={() => Math.random().toString()}
-        ListEmptyComponent={<Text textAlign={'center'}>The section favorites is empty</Text>}
+        ListEmptyComponent={
+          <Text textAlign={'center'} color={'label'}>
+            Empty
+          </Text>
+        }
         removeClippedSubviews={true}
         initialNumToRender={10}
         maxToRenderPerBatch={10}

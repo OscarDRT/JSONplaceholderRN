@@ -27,7 +27,7 @@ export const Header = ({ leftComponent, title, rightComponent, ...props }: Heade
             {leftComponent}
           </Box>
           <Box flex={1} alignItems={'center'} flexDirection={'row'} justifyContent={'center'}>
-            <Text fontSize={26} color={'background'} fontWeight={'bold'}>
+            <Text fontSize={26} color={'label'} fontWeight={'bold'}>
               {title}
             </Text>
           </Box>

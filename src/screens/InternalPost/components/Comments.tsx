@@ -9,11 +9,13 @@ import { CommentInterface } from '../../../shared/types'
 const Comment = ({ comment }: { comment: CommentInterface }) => {
   return (
     <Box borderBottomWidth={1} marginBottom={'s'} paddingVertical={'m'}>
-      <Text numberOfLines={1} mb={'xxs'}>
+      <Text numberOfLines={1} mb={'xxs'} color={'label'}>
         {comment.name} - {comment.email}
       </Text>
 
-      <Text textAlign={'justify'}>{comment.body}</Text>
+      <Text textAlign={'justify'} color={'label'}>
+        {comment.body}
+      </Text>
     </Box>
   )
 }
@@ -32,11 +34,9 @@ const Comments = ({ postId }: { postId: number }) => {
 
   return (
     <Box>
-      <Box backgroundColor={'foregroud'} width={width} alignSelf={'center'} padding={'s'} marginBottom={'s'}>
-        <Text fontSize={24} fontWeight={'bold'}>
-          COMMENTS
-        </Text>
-      </Box>
+      <Text fontSize={24} fontWeight={'bold'} color={'label'}>
+        COMMENTS
+      </Text>
       {response?.map((comment) => {
         return <Comment key={Math.random()} comment={comment} />
       })}

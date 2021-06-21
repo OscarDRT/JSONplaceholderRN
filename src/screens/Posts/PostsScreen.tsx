@@ -57,7 +57,7 @@ export default function PostsScreen() {
                 backgroundColor: idx === index ? colors.green : colors.foregroud,
               }}
             >
-              <Text fontSize={16} color={idx === index ? 'foregroud' : 'green'} fontWeight={'bold'}>
+              <Text fontSize={16} color={idx === index ? 'label' : 'green'} fontWeight={'bold'}>
                 {route.title}
               </Text>
             </TouchableOpacity>
@@ -73,7 +73,7 @@ export default function PostsScreen() {
         title={'Posts'}
         rightComponent={
           <TouchableOpacity onPress={loadPosts}>
-            <Text fontSize={20} color={'background'}>
+            <Text fontSize={20} color={'label'}>
               Refresh
             </Text>
           </TouchableOpacity>

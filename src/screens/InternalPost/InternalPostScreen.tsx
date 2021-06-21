@@ -16,7 +16,7 @@ import Comments from './components/Comments'
 import UserInfo from './components/UserInfo'
 
 const InternalPostScreen = ({ route, navigation }: StackNavigationProps<RootStackParamList, 'InternalPostScreen'>) => {
-  const { spacing } = useTheme()
+  const { spacing, colors } = useTheme()
 
   const { id, isFavorite } = route.params ?? {}
 
@@ -35,19 +35,29 @@ const InternalPostScreen = ({ route, navigation }: StackNavigationProps<RootStac
 
   if (!post) {
     return (
-      <Placeholder style={{ padding: spacing.s }} Animation={Fade}>
-        <PlaceholderLine width={40} height={20} />
-        <PlaceholderLine />
-        <PlaceholderLine />
-        <PlaceholderLine width={50} />
-      </Placeholder>
+      <Container>
+        <Header
+          title={'Post'}
+          leftComponent={
+            <TouchableOpacity onPress={() => navigation.canGoBack() && navigation.goBack()}>
+              <Icon name={'chevronLeft'} fill={colors.label} />
+            </TouchableOpacity>
+          }
+        />
+        <Placeholder style={{ padding: spacing.s }} Animation={Fade}>
+          <PlaceholderLine width={40} height={20} />
+          <PlaceholderLine />
+          <PlaceholderLine />
+          <PlaceholderLine width={50} />
+        </Placeholder>
+      </Container>
     )
   }
 
   if (error) {
     return (
       <Container padding={'s'} alignItems={'center'}>
-        <Text>{error.message}</Text>
+        <Text color={'label'}>{error.message}</Text>
       </Container>
     )
   }
@@ -58,7 +68,7 @@ const InternalPostScreen = ({ route, navigation }: StackNavigationProps<RootStac
         title={'Post'}
         leftComponent={
           <TouchableOpacity onPress={() => navigation.canGoBack() && navigation.goBack()}>
-            <Icon name={'chevronLeft'} />
+            <Icon name={'chevronLeft'} fill={colors.label} />
           </TouchableOpacity>
         }
         rightComponent={
@@ -68,11 +78,11 @@ const InternalPostScreen = ({ route, navigation }: StackNavigationProps<RootStac
         }
       />
       <ScrollView showsVerticalScrollIndicator={false} style={{ padding: spacing.l }}>
-        <Text fontSize={24} fontWeight={'bold'}>
+        <Text fontSize={24} fontWeight={'bold'} color={'label'}>
           Description
         </Text>
 
-        <Text fontSize={16} mt={'s'} textAlign={'justify'}>
+        <Text fontSize={16} mt={'s'} textAlign={'justify'} color={'label'}>
           {post?.body}
         </Text>
 
